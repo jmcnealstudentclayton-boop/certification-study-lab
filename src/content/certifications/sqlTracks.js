@@ -53,8 +53,8 @@ const intermediate = [
 ];
 
 const advanced = intermediate.map(([prompt, solution], index) => [
-  `Advanced ${index + 1}: ${prompt.replace("Return", "Write a production-ready query that returns")}`,
-  solution,
+  `Advanced ${index + 1}: Use a CTE named source_rows, then ${prompt.replace(/^Return /, "return ").replace(/^Write /, "write ")}`,
+  `WITH source_rows AS (SELECT * FROM WORK_ITEMS) ${solution.replaceAll("WORK_ITEMS", "source_rows")}`,
 ]);
 
 const basic = { ...sqlBasic, questions: [...sqlBasic.questions, ...basicExtra.map(([prompt, solution], index) => question("hackerrank-sql-basic", index + 10, prompt, solution))] };
