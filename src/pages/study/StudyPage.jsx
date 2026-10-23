@@ -56,7 +56,7 @@ function Feedback({ result, question }) {
         <div>
           <h2 className="font-black text-ink" id="feedback-title">{isCorrect ? "Nice work." : "Not quite yet."}</h2>
           <p className="mt-1 text-sm leading-6 text-ink/70">{result.message}</p>
-          {!isCorrect && <ul className="mt-4 space-y-3">
+          {!isCorrect && result.issues?.length > 0 && <ul className="mt-4 space-y-3">
             {result.issues.map((issue) => (
               <li className="rounded-xl bg-white/65 p-3 text-sm leading-6 text-ink/75" key={issue.requirement}>
                 <strong className="block text-ink">{issue.requirement}</strong>
