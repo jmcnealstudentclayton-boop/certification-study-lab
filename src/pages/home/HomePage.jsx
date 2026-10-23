@@ -3,6 +3,7 @@ import BrandMark from "../../components/BrandMark.jsx";
 import Icon from "../../components/Icon.jsx";
 import ProgressBar from "../../components/ProgressBar.jsx";
 import { certifications, studyModes, todayFocus } from "./homeData.js";
+import { completionFor } from "../../features/progress/progressStore.js";
 
 function Header() {
   return (
@@ -95,7 +96,8 @@ function StudyModeCard({ mode, onSelect }) {
   );
 }
 
-function CertificationCard({ certification, onOpenCertification }) {
+function CertificationCard({ certification, onOpenCertification, progress }) {
+  const completion = completionFor(progress, certification);
   const accent = certification.accent === "orange" ? "bg-study-orange" : "bg-study-teal";
 
   return (
@@ -111,13 +113,13 @@ function CertificationCard({ certification, onOpenCertification }) {
       <p className="mt-5 text-xs font-extrabold uppercase tracking-[0.12em] text-ink/45">{certification.provider}</p>
       <h3 className="mt-2 text-xl font-black tracking-tight text-ink">{certification.name}</h3>
       <p className="mt-2 min-h-12 text-sm leading-6 text-ink/60">{certification.description}</p>
-      <div className="mt-5"><ProgressBar label="Progress" value={certification.progress} tone={certification.accent} /></div>
-      <p className="mt-4 text-xs font-bold text-ink/45">{certification.questions ? `${certification.questions} practice question available` : "Content plan in progress"}</p>
+      <div className="mt-5"><ProgressBar label={`${completion.count} of ${certification.questions} completed`} value={completion.percent} tone={certification.accent} /></div>
+      <p className="mt-4 text-xs font-bold text-ink/45">{certification.questions} practice questions</p>
     </article>
   );
 }
 
-export default function HomePage({ onOpenCertification }) {
+export default function HomePage({ onManageCertifications, onOpenCertification, progress }) {
   const [notice, setNotice] = useState("");
 
   function handleStart() {
@@ -150,8 +152,8 @@ export default function HomePage({ onOpenCertification }) {
           </section>
           <section className="mt-12 grid gap-6 lg:grid-cols-[1.4fr_0.6fr]" id="certifications">
             <div>
-              <div className="mb-5 flex items-end justify-between gap-4"><div><p className="text-xs font-extrabold uppercase tracking-[0.14em] text-study-orange">Keep building</p><h2 className="mt-2 text-2xl font-black tracking-tight text-ink">Your certifications</h2></div><button className="text-sm font-extrabold text-study-teal hover:text-ink" type="button">Manage all</button></div>
-              <div className="grid gap-4 md:grid-cols-2">{certifications.map((certification) => <CertificationCard key={certification.id} certification={certification} onOpenCertification={onOpenCertification} />)}</div>
+              <div className="mb-5 flex items-end justify-between gap-4"><div><p className="text-xs font-extrabold uppercase tracking-[0.14em] text-study-orange">Keep building</p><h2 className="mt-2 text-2xl font-black tracking-tight text-ink">Your certifications</h2></div><button className="text-sm font-extrabold text-study-teal hover:text-ink" onClick={onManageCertifications} type="button">Manage all</button></div>
+              <div className="grid gap-4 md:grid-cols-2">{certifications.map((certification) => <CertificationCard key={certification.id} certification={certification} onOpenCertification={onOpenCertification} progress={progress} />)}</div>
             </div>
             <aside className="rounded-[1.5rem] bg-study-peach p-6" aria-labelledby="focus-title">
               <span className="grid size-11 place-items-center rounded-2xl bg-white text-study-orange"><Icon name="spark" size={21} /></span>

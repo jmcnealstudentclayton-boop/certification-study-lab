@@ -110,14 +110,14 @@ function SessionComplete({ certification, onBack }) {
         <p className="mt-6 text-xs font-extrabold uppercase tracking-[0.14em] text-study-teal">Session complete</p>
         <h1 className="mt-3 text-3xl font-black tracking-tight text-ink sm:text-4xl">You completed all {certification.questions.length} practice questions.</h1>
         <p className="mt-4 text-sm leading-6 text-ink/65">Review the explanations any time, then come back for another pass as the question bank grows.</p>
-        <button className="mt-7 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-extrabold text-white transition hover:bg-study-teal" onClick={onBack} type="button">Back to SQL (Basic) <Icon name="arrow" size={17} /></button>
+        <button className="mt-7 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-extrabold text-white transition hover:bg-study-teal" onClick={onBack} type="button">Back to certification <Icon name="arrow" size={17} /></button>
       </section>
     </main>
   );
 }
 
-export default function StudyPage({ certification, onBack }) {
-  const [questionIndex, setQuestionIndex] = useState(0);
+export default function StudyPage({ certification, completedQuestionIds, onBack, onCompleteQuestion }) {
+  const [questionIndex, setQuestionIndex] = useState(() => certification.questions.findIndex((item) => !completedQuestionIds.includes(item.id)) || 0);
   const [query, setQuery] = useState("");
   const [result, setResult] = useState(null);
   const [isComplete, setIsComplete] = useState(false);
@@ -134,6 +134,7 @@ export default function StudyPage({ certification, onBack }) {
   }
 
   function handleAdvance() {
+    onCompleteQuestion(certification.id, question.id);
     if (questionIndex === certification.questions.length - 1) {
       setIsComplete(true);
       return;
@@ -152,7 +153,7 @@ export default function StudyPage({ certification, onBack }) {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-study-teal">Practice session</p>
-              <h1 className="mt-2 text-3xl font-black tracking-tight text-ink sm:text-4xl">Basic SQL queries</h1>
+              <h1 className="mt-2 text-3xl font-black tracking-tight text-ink sm:text-4xl">{certification.name} queries</h1>
             </div>
             <div className="rounded-full bg-study-aqua px-4 py-2 text-sm font-extrabold text-ink">Question {questionIndex + 1} of {certification.questions.length}</div>
           </div>

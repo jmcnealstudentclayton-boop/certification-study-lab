@@ -1,0 +1,12 @@
+import BrandMark from "../../components/BrandMark.jsx";
+import Icon from "../../components/Icon.jsx";
+import ProgressBar from "../../components/ProgressBar.jsx";
+import { completionFor } from "../../features/progress/progressStore.js";
+
+export default function CertificationsPage({ certifications, onBack, onOpenCertification, onReset, progress }) {
+  return <div className="min-h-screen bg-white text-ink"><div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
+    <header className="flex items-center justify-between gap-5 py-5"><BrandMark /><button className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-extrabold text-ink/65 hover:bg-study-aqua" onClick={onBack} type="button"><Icon name="back" size={17} />Dashboard</button></header>
+    <main className="pb-16 pt-5 sm:pt-8"><p className="text-xs font-extrabold uppercase tracking-[0.14em] text-study-teal">Your learning plan</p><h1 className="mt-2 text-4xl font-black tracking-tight text-ink">Manage certifications</h1><p className="mt-3 max-w-2xl leading-7 text-ink/65">Open any SQL level, pick up at your first unfinished question, or reset a track when you want a clean retry.</p>
+      <div className="mt-8 grid gap-5 md:grid-cols-3">{certifications.map((certification) => { const completion = completionFor(progress, certification); return <article className="rounded-[1.5rem] border border-ink/10 bg-white p-5 shadow-[0_12px_30px_rgba(24,49,61,0.05)]" key={certification.id}><span className="grid size-11 place-items-center rounded-2xl bg-study-aqua text-study-teal"><Icon name="target" size={21} /></span><p className="mt-5 text-xs font-extrabold uppercase tracking-[0.12em] text-ink/45">HackerRank</p><h2 className="mt-2 text-xl font-black text-ink">{certification.name}</h2><p className="mt-2 min-h-12 text-sm leading-6 text-ink/60">{certification.description}</p><div className="mt-5"><ProgressBar label={`${completion.count} of ${certification.questions.length} completed`} value={completion.percent} tone={certification.accent} /></div><div className="mt-6 flex gap-2"><button className="flex-1 rounded-full bg-study-teal px-4 py-2.5 text-sm font-extrabold text-white hover:bg-ink" onClick={() => onOpenCertification(certification.id)} type="button">Open track</button>{completion.count > 0 && <button className="rounded-full px-3 text-sm font-extrabold text-ink/55 hover:bg-study-peach" onClick={() => onReset(certification.id)} type="button" aria-label={`Reset ${certification.name}`}>Reset</button>}</div></article>; })}</div>
+    </main></div></div>;
+}
