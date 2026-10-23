@@ -5,20 +5,17 @@ export const certifications = [
     provider: "HackerRank",
     description: "Build confidence with fundamental queries, filtering, functions, sorting, and joins.",
     progress: 0,
-    questions: 9,
+    questions: 20,
     accent: "teal",
     available: true,
   },
-  {
-    id: "security-fundamentals",
-    name: "Security Fundamentals",
-    provider: "Planned study track",
-    description: "Practice the vocabulary and principles behind modern security work.",
+  { id: "hackerrank-sql-intermediate", name: "SQL (Intermediate)", provider: "HackerRank", description: "Practice grouped results, subqueries, conditional logic, and window functions.",
     progress: 0,
-    questions: 0,
+    questions: 20,
     accent: "orange",
-    available: false,
+    available: true,
   },
+  { id: "hackerrank-sql-advanced", name: "SQL (Advanced)", provider: "HackerRank", description: "Practice advanced analytical SQL patterns and precise query construction.", progress: 0, questions: 20, accent: "teal", available: true },
 ];
 
 export const studyModes = [

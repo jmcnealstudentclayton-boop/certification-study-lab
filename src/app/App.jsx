@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import HomePage from "../pages/home/HomePage.jsx";
 import CertificationPage from "../pages/certification/CertificationPage.jsx";
 import StudyPage from "../pages/study/StudyPage.jsx";
-import hackerrankSqlBasic from "../content/certifications/hackerrankSqlBasic.js";
+import hackerrankSqlBasic, { sqlAdvanced, sqlIntermediate } from "../content/certifications/sqlTracks.js";
 
 const certifications = {
   [hackerrankSqlBasic.id]: hackerrankSqlBasic,
+  [sqlIntermediate.id]: sqlIntermediate,
+  [sqlAdvanced.id]: sqlAdvanced,
 };
 
 function readRoute() {

@@ -100,6 +100,13 @@ export function evaluateSqlQuery(query, question) {
     return { isCorrect: false, message: "Write a query before submitting." };
   }
 
+  if (question.validation?.mode === "canonical-query") {
+    const expectedQuery = normalizeQuery(question.solutionQuery);
+    return normalizedQuery === expectedQuery
+      ? { isCorrect: true, message: "Correct. Your query matches the required practice solution." }
+      : { isCorrect: false, message: "Compare your query with the requested clauses, expressions, and conditions.", issues: [{ requirement: "Match the requested query structure", why: "This advanced practice prompt checks its canonical query shape so each clause can be reviewed precisely." }] };
+  }
+
   const tableName = question.schema[0].name;
   const failures = [];
   const addFailure = (requirement, why) => failures.push({ requirement, why });
