@@ -1,0 +1,34 @@
+---
+description: Rules for certification metadata, question banks, explanations, and study data.
+globs: ["content/**/*", "data/**/*", "src/**/*question*", "src/**/*quiz*", "**/*question*.json", "**/*certification*.json"]
+alwaysApply: false
+---
+
+# Content and data rules
+
+Read `docs/CONTENT-MODEL.md` before changing certification data or quiz behavior.
+
+## Question quality
+
+- Every question must have a stable, descriptive ID and a certification ID.
+- State the tested concept clearly and avoid trick wording unless the ambiguity is itself the learning objective.
+- Multiple-choice questions must have exactly one defensible correct answer.
+- SQL-query questions must include enough schema and dialect context to be answerable without external lookup.
+- Distractors should be plausible misconceptions, not jokes, grammar mismatches, or obviously shorter choices.
+- Explanations must teach the reasoning, not only repeat the answer.
+- Include a source or reference for factual claims when one is available.
+- Mark draft content as draft; do not silently present unreviewed content as published.
+
+## Integrity and safety
+
+- Write original questions and explanations. Never copy proprietary exam questions or exam dumps.
+- Do not store credentials, API keys, or private learner information in content files.
+- Treat imported content as untrusted until it has passed the content review workflow.
+- Do not use exact string matching as the long-term grading strategy for SQL; equivalent valid queries may differ in whitespace, capitalization, aliases, or clause formatting.
+
+## Data behavior
+
+- Keep certification metadata, question banks, and learner progress in separate models.
+- Use explicit schemas and runtime validation at data boundaries.
+- Keep scoring deterministic and make the scoring policy visible in the UI.
+- Prefer additive schema changes and provide a migration path for persisted local data.

@@ -1,0 +1,63 @@
+---
+description: Project file structure, module boundaries, asset placement, and naming conventions for the React website.
+alwaysApply: true
+---
+
+# File structure and naming rules
+
+Use `docs/FILE-STRUCTURE.md` as the detailed source of truth. These conventions are optimized for this project; they are not a universal React requirement.
+
+## Page entry points
+
+- Each HTML page has one module-script import.
+- Each page entry lives at `src/pages/<page-name>/index.js`.
+- A page `index.js` only mounts React, imports the page component, and imports global styles when needed. Do not put page UI or business logic in it.
+- Reserve `index.js` for page entry points. Do not create generic barrel files named `index.js` in components, features, data, or utilities.
+- The page component is named `<PageName>Page.jsx`, for example `HomePage.jsx` or `StudyPage.jsx`.
+
+## Placement
+
+- Put page-specific files beside the page in `src/pages/<page-name>/`.
+- Put reusable behavior inside `src/features/<feature-name>/` when it belongs to a learner capability such as study sessions, progress, or review.
+- Put components in `src/components/` only when they are truly shared. Prefer `components/ui/` for primitives and `components/layout/` for shell pieces.
+- Put certification source content in root `content/`; put loaders and validators in `src/content/`.
+- Put browser/storage adapters and generic infrastructure in `src/lib/`. Do not use `lib/` as a miscellaneous business-logic bucket.
+- Keep tests next to the source they test. Put browser end-to-end tests in `tests/e2e/`.
+
+## Naming
+
+- Use lowercase kebab-case for directories: `study-session`, `question-bank`.
+- Use PascalCase for React component files and component functions: `QuestionCard.jsx`.
+- Use lower camelCase for JavaScript data, domain, and utility modules: `studyData.js`, `scoreAttempt.js`.
+- Prefix hooks with `use`: `useStudySession.js`.
+- Match test names to the source: `QuestionCard.test.jsx`, `scoreAttempt.test.js`.
+- Use descriptive names. Do not create `misc`, `common`, `helpers`, or `utils` files unless their responsibility is narrow and explicit.
+- Use `.jsx` when a file contains JSX and `.js` for entry points, data, logic, and configuration.
+
+## Dependency direction
+
+Keep imports flowing toward lower-level modules:
+
+```text
+HTML page → page entry → page component → feature/shared component → lib
+content files → content loaders/validators → feature/domain logic
+```
+
+- `src/lib/` must not import from pages or features.
+- Shared components must not import from a specific page or certification.
+- Certification content must not import React components.
+- Avoid circular dependencies. If two modules need each other, move their shared contract to a lower layer.
+
+## File size and exports
+
+- Keep every `.js` and `.jsx` file at or below 500 lines.
+- Prefer one primary component or one cohesive module responsibility per file.
+- Use named exports when a module has multiple public functions; use a default export for a page or single primary React component.
+- When an import requires more than two parent-directory segments, consider a configured `@/` source alias instead of hiding a confusing dependency behind a barrel file.
+
+## Assets
+
+- Import assets from source when they belong to a component or should participate in the build.
+- Use `public/` only for assets that need a stable root URL or must retain an exact filename, such as a favicon, manifest, or robots file.
+- Reference public assets with root paths such as `/favicon.svg`, never `public/favicon.svg`.
+

@@ -1,0 +1,18 @@
+{
+  "id": "hackerrank-sql-basic",
+  "name": "SQL (Basic)",
+  "provider": "HackerRank",
+  "description": "An unofficial study track for the fundamental SQL syntax, queries, data operations, functions, sorting, limiting, and joins associated with HackerRank's SQL (Basic) skills certification.",
+  "officialUrl": "https://www.hackerrank.com/skills-directory/sql_basic",
+  "domainIds": [
+    "sql-basic-introduction",
+    "sql-basic-queries",
+    "sql-basic-ddl",
+    "sql-basic-dml",
+    "sql-basic-functions",
+    "sql-basic-sorting-limiting",
+    "sql-basic-joins"
+  ],
+  "unofficialNotice": "This project is an unofficial study aid. It is not affiliated with or endorsed by HackerRank, and it does not reproduce official assessment questions.",
+  "status": "draft"
+}

@@ -1,0 +1,27 @@
+---
+description: Core context and non-negotiable conventions for the certification study website.
+alwaysApply: true
+---
+
+# Certification Study Lab context
+
+Use `README.md`, `AGENTS.md`, and the documents in `docs/` as the project source of truth. The project is a local-first, unofficial study aid designed to support multiple professional certifications.
+
+## Preserve these decisions
+
+- Keep certification content separate from application logic.
+- Prefer a static, GitHub-Pages-compatible implementation unless the user explicitly changes the product direction.
+- Keep progress and preferences on the user's device by default.
+- Use original practice content; never add leaked, confidential, or reconstructed proprietary exam questions.
+- Use the shared design tokens in `design/tokens.json` for visual decisions.
+- Use React with JavaScript and Tailwind CSS for the application layer.
+- Keep every JavaScript and JSX file at or below 500 lines.
+- Use one page entry point at `src/pages/<page-name>/index.js` for each HTML page.
+
+## Working style
+
+- Inspect existing patterns before creating new ones.
+- Make the smallest coherent change that satisfies the request.
+- If a request conflicts with a documented decision, explain the conflict and update the relevant decision record when the user chooses a new direction.
+- Do not claim a feature is complete without running the relevant checks.
+- End implementation work with a concise summary, verification results, and any follow-up decision needed.

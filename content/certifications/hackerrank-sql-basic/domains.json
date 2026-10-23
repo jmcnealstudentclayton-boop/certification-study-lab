@@ -1,0 +1,133 @@
+[
+  {
+    "id": "sql-basic-introduction",
+    "certificationId": "hackerrank-sql-basic",
+    "name": "Introduction to SQL",
+    "description": "Understand the purpose of relational databases, tables, columns, rows, and SQL statements.",
+    "objectives": [
+      {
+        "id": "sql-basic-introduction-relational-data",
+        "description": "Describe how SQL is used to work with relational data."
+      },
+      {
+        "id": "sql-basic-introduction-data-types",
+        "description": "Recognize common table and column data types."
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "sql-basic-queries",
+    "certificationId": "hackerrank-sql-basic",
+    "name": "Basic SQL Queries",
+    "description": "Retrieve and filter rows with SELECT, FROM, WHERE, comparison operators, and logical operators.",
+    "objectives": [
+      {
+        "id": "sql-basic-queries-select",
+        "description": "Write SELECT statements that return selected columns or all columns."
+      },
+      {
+        "id": "sql-basic-queries-where",
+        "description": "Filter rows with WHERE conditions."
+      },
+      {
+        "id": "sql-basic-queries-logical-operators",
+        "description": "Combine conditions with AND and OR."
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "sql-basic-ddl",
+    "certificationId": "hackerrank-sql-basic",
+    "name": "Data Definition Language",
+    "description": "Define and change table structures with common DDL statements.",
+    "objectives": [
+      {
+        "id": "sql-basic-ddl-statements",
+        "description": "Explain the purpose of CREATE, ALTER, and DROP."
+      },
+      {
+        "id": "sql-basic-ddl-constraints",
+        "description": "Identify how columns and constraints shape a table."
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "sql-basic-dml",
+    "certificationId": "hackerrank-sql-basic",
+    "name": "Data Manipulation Language",
+    "description": "Change table data with INSERT, UPDATE, and DELETE statements.",
+    "objectives": [
+      {
+        "id": "sql-basic-dml-insert",
+        "description": "Insert rows with INSERT INTO."
+      },
+      {
+        "id": "sql-basic-dml-update-delete",
+        "description": "Update or delete only the rows selected by a condition."
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "sql-basic-functions",
+    "certificationId": "hackerrank-sql-basic",
+    "name": "Basic Functions and Expressions",
+    "description": "Use expressions and common aggregate functions to summarize values.",
+    "objectives": [
+      {
+        "id": "sql-basic-functions-aggregates",
+        "description": "Use COUNT, SUM, AVG, MIN, and MAX."
+      },
+      {
+        "id": "sql-basic-functions-row-vs-aggregate",
+        "description": "Distinguish row-level expressions from aggregate results."
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "sql-basic-sorting-limiting",
+    "certificationId": "hackerrank-sql-basic",
+    "name": "Sorting and Limiting Results",
+    "description": "Order query results and limit the number of rows returned.",
+    "objectives": [
+      {
+        "id": "sql-basic-sorting-order-by",
+        "description": "Sort results with ORDER BY."
+      },
+      {
+        "id": "sql-basic-sorting-direction",
+        "description": "Choose ascending or descending sort direction."
+      },
+      {
+        "id": "sql-basic-sorting-row-limit",
+        "description": "Use a dialect-appropriate row limit."
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "sql-basic-joins",
+    "certificationId": "hackerrank-sql-basic",
+    "name": "Joins",
+    "description": "Combine related rows from multiple tables with joins.",
+    "objectives": [
+      {
+        "id": "sql-basic-joins-inner",
+        "description": "Match related rows with an INNER JOIN."
+      },
+      {
+        "id": "sql-basic-joins-left",
+        "description": "Preserve rows from one side with a LEFT JOIN."
+      },
+      {
+        "id": "sql-basic-joins-conditions",
+        "description": "Use explicit join conditions."
+      }
+    ],
+    "status": "draft"
+  }
+]

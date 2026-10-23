@@ -1,0 +1,16 @@
+---
+description: Verification rules for application code, question content, scoring, and learner-facing behavior.
+globs: ["**/*.test.*", "**/*.spec.*", "tests/**/*", "scripts/**/*", "content/**/*", "data/**/*"]
+alwaysApply: false
+---
+
+# Testing and quality rules
+
+- Add or update tests when changing scoring, question selection, answer feedback, persistence, or navigation.
+- Test content validation separately from UI rendering.
+- Include boundary cases: empty banks, one-question sessions, skipped questions, repeated sessions, malformed options, and local-storage corruption.
+- Keep quiz tests deterministic by injecting a seed or disabling randomization in tests.
+- Test that an answer is not marked correct before submission and that feedback identifies the reasoning after submission.
+- Prefer accessible queries and user-level interactions in UI tests.
+- Run linting, unit tests, content validation, and the production build before handoff when those scripts exist.
+- If a check cannot run, state the reason rather than implying it passed.

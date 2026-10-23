@@ -1,0 +1,27 @@
+---
+description: Development workflow for planning, implementing, reviewing, and documenting project changes.
+alwaysApply: true
+---
+
+# Workflow rules
+
+Before editing:
+
+1. Locate the relevant source, content, design token, and test files.
+2. Explain the intended change in terms of learner behavior.
+3. Check whether the change affects a documented architecture or content decision.
+
+While editing:
+
+- Reuse existing components and patterns before adding new abstractions.
+- Keep JavaScript and JSX files at or below 500 lines; split page entries, feature components, and domain logic by responsibility.
+- Keep each HTML page to one module-script import that points to its page entry `index.js`.
+- Keep content changes reviewable independently from code changes when practical.
+- Avoid unrelated formatting or dependency changes.
+- Update the nearest documentation when a behavior, data shape, or decision changes.
+
+Before handoff:
+
+- Review the diff for accidental data, secrets, or generated artifacts.
+- Run the smallest meaningful verification set, then broaden it when risk warrants.
+- Summarize files changed, checks run, and any known limitations.

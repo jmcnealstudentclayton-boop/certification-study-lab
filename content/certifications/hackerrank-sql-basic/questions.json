@@ -1,0 +1,350 @@
+[
+  {
+    "id": "hackerrank-sql-basic-queries-select-filter-001",
+    "certificationId": "hackerrank-sql-basic",
+    "domainId": "sql-basic-queries",
+    "objectiveIds": [
+      "sql-basic-queries-select",
+      "sql-basic-queries-where",
+      "sql-basic-queries-logical-operators"
+    ],
+    "type": "sql-query",
+    "prompt": "Write a query that returns every column from CITY_STATS for Canadian cities with a population of at least 250,000. A Canadian row is identified by COUNTRY_CODE = 'CAN'.",
+    "dialect": "standard-sql",
+    "schema": [
+      {
+        "name": "CITY_STATS",
+        "columns": [
+          { "name": "CITY_ID", "type": "INTEGER" },
+          { "name": "CITY_NAME", "type": "VARCHAR(80)" },
+          { "name": "COUNTRY_CODE", "type": "CHAR(3)" },
+          { "name": "POPULATION", "type": "INTEGER" }
+        ]
+      }
+    ],
+    "solutionQuery": "SELECT *\nFROM CITY_STATS\nWHERE COUNTRY_CODE = 'CAN'\n  AND POPULATION >= 250000;",
+    "validation": {
+      "mode": "requirements",
+      "requirements": [
+        { "type": "select-all-columns" },
+        { "type": "table", "value": "CITY_STATS" },
+        { "type": "equals", "column": "COUNTRY_CODE", "value": "CAN" },
+        { "type": "comparison", "column": "POPULATION", "operator": ">=", "value": 250000 },
+        { "type": "logical-operator", "value": "AND" }
+      ]
+    },
+    "explanation": "SELECT * returns every column. The WHERE clause keeps only rows whose country code is CAN, and AND requires the population condition to be true for the same row. Because the prompt says at least 250,000, the comparison must be >= rather than >.",
+    "commonMistakes": [
+      "Using > instead of >= and excluding a city with exactly 250,000 residents.",
+      "Joining conditions with OR, which would allow rows that match only one requirement.",
+      "Filtering by CITY_NAME instead of the requested COUNTRY_CODE."
+    ],
+    "difficulty": "introductory",
+    "tags": [
+      "select",
+      "where",
+      "and",
+      "comparison-operators",
+      "sql-query-writing"
+    ],
+    "references": [
+      {
+        "label": "HackerRank SQL (Basic) skills directory",
+        "url": "https://www.hackerrank.com/skills-directory/sql_basic"
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "hackerrank-sql-basic-queries-projection-002",
+    "certificationId": "hackerrank-sql-basic",
+    "domainId": "sql-basic-queries",
+    "objectiveIds": ["sql-basic-queries-select", "sql-basic-queries-where"],
+    "type": "sql-query",
+    "prompt": "Return PRODUCT_NAME and UNIT_PRICE from PRODUCTS for rows whose CATEGORY is 'Books'. Do not return any other columns.",
+    "dialect": "standard-sql",
+    "schema": [
+      {
+        "name": "PRODUCTS",
+        "columns": [
+          { "name": "PRODUCT_ID", "type": "INTEGER" },
+          { "name": "PRODUCT_NAME", "type": "VARCHAR(120)" },
+          { "name": "CATEGORY", "type": "VARCHAR(40)" },
+          { "name": "UNIT_PRICE", "type": "DECIMAL(10,2)" }
+        ]
+      }
+    ],
+    "solutionQuery": "SELECT PRODUCT_NAME, UNIT_PRICE\nFROM PRODUCTS\nWHERE CATEGORY = 'Books';",
+    "validation": {
+      "mode": "requirements",
+      "requirements": [
+        { "type": "select-columns", "columns": ["PRODUCT_NAME", "UNIT_PRICE"] },
+        { "type": "table", "value": "PRODUCTS" },
+        { "type": "equals", "column": "CATEGORY", "value": "Books" }
+      ]
+    },
+    "explanation": "List only the requested columns after SELECT, then use WHERE to keep the Books rows. Selecting * would return extra data the prompt did not ask for.",
+    "commonMistakes": ["Using SELECT * instead of the two requested columns.", "Putting Books in the SELECT list instead of filtering with WHERE."],
+    "difficulty": "introductory",
+    "tags": ["select", "projection", "where"],
+    "references": [{ "label": "HackerRank SQL (Basic) skills directory", "url": "https://www.hackerrank.com/skills-directory/sql_basic" }],
+    "status": "draft"
+  },
+  {
+    "id": "hackerrank-sql-basic-queries-distinct-003",
+    "certificationId": "hackerrank-sql-basic",
+    "domainId": "sql-basic-queries",
+    "objectiveIds": ["sql-basic-queries-select"],
+    "type": "sql-query",
+    "prompt": "Return each unique DEPARTMENT_CODE found in EMPLOYEES. The result must not contain duplicates.",
+    "dialect": "standard-sql",
+    "schema": [
+      {
+        "name": "EMPLOYEES",
+        "columns": [
+          { "name": "EMPLOYEE_ID", "type": "INTEGER" },
+          { "name": "EMPLOYEE_NAME", "type": "VARCHAR(100)" },
+          { "name": "DEPARTMENT_CODE", "type": "VARCHAR(12)" }
+        ]
+      }
+    ],
+    "solutionQuery": "SELECT DISTINCT DEPARTMENT_CODE\nFROM EMPLOYEES;",
+    "validation": {
+      "mode": "requirements",
+      "requirements": [
+        { "type": "distinct" },
+        { "type": "select-columns", "columns": ["DEPARTMENT_CODE"] },
+        { "type": "table", "value": "EMPLOYEES" }
+      ]
+    },
+    "explanation": "DISTINCT removes duplicate rows from the selected result. Because only DEPARTMENT_CODE is selected, each department code appears once.",
+    "commonMistakes": ["Selecting EMPLOYEE_NAME, which makes each row distinct for the wrong reason.", "Using GROUP BY when DISTINCT is the clearer fit for this task."],
+    "difficulty": "introductory",
+    "tags": ["select", "distinct", "duplicates"],
+    "references": [{ "label": "HackerRank SQL (Basic) skills directory", "url": "https://www.hackerrank.com/skills-directory/sql_basic" }],
+    "status": "draft"
+  },
+  {
+    "id": "hackerrank-sql-basic-sorting-limit-004",
+    "certificationId": "hackerrank-sql-basic",
+    "domainId": "sql-basic-sorting-limiting",
+    "objectiveIds": ["sql-basic-sorting-order-by", "sql-basic-sorting-direction", "sql-basic-sorting-row-limit"],
+    "type": "sql-query",
+    "prompt": "Return every column from ROUTES for the five longest routes. Sort by DISTANCE_KM from highest to lowest.",
+    "dialect": "mysql",
+    "schema": [
+      {
+        "name": "ROUTES",
+        "columns": [
+          { "name": "ROUTE_ID", "type": "INTEGER" },
+          { "name": "ORIGIN", "type": "VARCHAR(80)" },
+          { "name": "DESTINATION", "type": "VARCHAR(80)" },
+          { "name": "DISTANCE_KM", "type": "INTEGER" }
+        ]
+      }
+    ],
+    "solutionQuery": "SELECT *\nFROM ROUTES\nORDER BY DISTANCE_KM DESC\nLIMIT 5;",
+    "validation": {
+      "mode": "requirements",
+      "requirements": [
+        { "type": "select-all-columns" },
+        { "type": "table", "value": "ROUTES" },
+        { "type": "order-by", "column": "DISTANCE_KM", "direction": "DESC" },
+        { "type": "limit", "value": 5 }
+      ]
+    },
+    "explanation": "DESC places the largest distances first. LIMIT is applied after the ordering, so the result contains the five longest routes rather than an arbitrary five rows.",
+    "commonMistakes": ["Using ASC and returning the shortest routes.", "Applying LIMIT without ORDER BY, which does not guarantee the five longest rows."],
+    "difficulty": "introductory",
+    "tags": ["select", "order-by", "desc", "limit"],
+    "references": [{ "label": "HackerRank SQL (Basic) skills directory", "url": "https://www.hackerrank.com/skills-directory/sql_basic" }],
+    "status": "draft"
+  },
+  {
+    "id": "hackerrank-sql-basic-functions-count-005",
+    "certificationId": "hackerrank-sql-basic",
+    "domainId": "sql-basic-functions",
+    "objectiveIds": ["sql-basic-functions-aggregates", "sql-basic-queries-where"],
+    "type": "sql-query",
+    "prompt": "Count the support tickets whose STATUS is 'OPEN'. Return the count in a column named OPEN_TICKET_COUNT.",
+    "dialect": "standard-sql",
+    "schema": [
+      {
+        "name": "SUPPORT_TICKETS",
+        "columns": [
+          { "name": "TICKET_ID", "type": "INTEGER" },
+          { "name": "STATUS", "type": "VARCHAR(20)" },
+          { "name": "PRIORITY", "type": "VARCHAR(12)" }
+        ]
+      }
+    ],
+    "solutionQuery": "SELECT COUNT(*) AS OPEN_TICKET_COUNT\nFROM SUPPORT_TICKETS\nWHERE STATUS = 'OPEN';",
+    "validation": {
+      "mode": "requirements",
+      "requirements": [
+        { "type": "table", "value": "SUPPORT_TICKETS" },
+        { "type": "equals", "column": "STATUS", "value": "OPEN" },
+        { "type": "aggregate", "function": "COUNT", "column": "*", "alias": "OPEN_TICKET_COUNT" }
+      ]
+    },
+    "explanation": "COUNT(*) counts the filtered rows. The WHERE clause must appear before the aggregation so only open tickets contribute to the result.",
+    "commonMistakes": ["Counting every ticket because the WHERE condition was omitted.", "Using COUNT(STATUS), which can skip rows where STATUS is NULL."],
+    "difficulty": "introductory",
+    "tags": ["count", "aggregate", "where", "alias"],
+    "references": [{ "label": "HackerRank SQL (Basic) skills directory", "url": "https://www.hackerrank.com/skills-directory/sql_basic" }],
+    "status": "draft"
+  },
+  {
+    "id": "hackerrank-sql-basic-functions-average-by-region-006",
+    "certificationId": "hackerrank-sql-basic",
+    "domainId": "sql-basic-functions",
+    "objectiveIds": ["sql-basic-functions-aggregates", "sql-basic-functions-row-vs-aggregate", "sql-basic-queries-where"],
+    "type": "sql-query",
+    "prompt": "For paid invoices only, return REGION and the average AMOUNT for each region. Name the average column AVERAGE_PAID_AMOUNT.",
+    "dialect": "standard-sql",
+    "schema": [
+      {
+        "name": "INVOICES",
+        "columns": [
+          { "name": "INVOICE_ID", "type": "INTEGER" },
+          { "name": "REGION", "type": "VARCHAR(30)" },
+          { "name": "AMOUNT", "type": "DECIMAL(10,2)" },
+          { "name": "PAYMENT_STATUS", "type": "VARCHAR(16)" }
+        ]
+      }
+    ],
+    "solutionQuery": "SELECT REGION, AVG(AMOUNT) AS AVERAGE_PAID_AMOUNT\nFROM INVOICES\nWHERE PAYMENT_STATUS = 'PAID'\nGROUP BY REGION;",
+    "validation": {
+      "mode": "requirements",
+      "requirements": [
+        { "type": "select-columns", "columns": ["REGION"] },
+        { "type": "table", "value": "INVOICES" },
+        { "type": "equals", "column": "PAYMENT_STATUS", "value": "PAID" },
+        { "type": "aggregate", "function": "AVG", "column": "AMOUNT", "alias": "AVERAGE_PAID_AMOUNT" },
+        { "type": "group-by", "columns": ["REGION"] }
+      ]
+    },
+    "explanation": "AVG(AMOUNT) calculates one average per group. Since REGION is also selected without an aggregate, GROUP BY REGION is required. Filtering paid invoices first prevents other invoice statuses from affecting the averages.",
+    "commonMistakes": ["Omitting GROUP BY REGION while selecting REGION alongside AVG.", "Filtering in HAVING instead of WHERE when selecting paid rows before aggregation."],
+    "difficulty": "intermediate",
+    "tags": ["avg", "aggregate", "group-by", "where"],
+    "references": [{ "label": "HackerRank SQL (Basic) skills directory", "url": "https://www.hackerrank.com/skills-directory/sql_basic" }],
+    "status": "draft"
+  },
+  {
+    "id": "hackerrank-sql-basic-joins-inner-007",
+    "certificationId": "hackerrank-sql-basic",
+    "domainId": "sql-basic-joins",
+    "objectiveIds": ["sql-basic-joins-inner", "sql-basic-joins-conditions"],
+    "type": "sql-query",
+    "prompt": "Return CUSTOMER_NAME and ORDER_TOTAL for orders that have a matching customer. Match ORDERS to CUSTOMERS using CUSTOMER_ID.",
+    "dialect": "standard-sql",
+    "schema": [
+      {
+        "name": "ORDERS",
+        "columns": [
+          { "name": "ORDER_ID", "type": "INTEGER" },
+          { "name": "CUSTOMER_ID", "type": "INTEGER" },
+          { "name": "ORDER_TOTAL", "type": "DECIMAL(10,2)" }
+        ]
+      },
+      {
+        "name": "CUSTOMERS",
+        "columns": [
+          { "name": "CUSTOMER_ID", "type": "INTEGER" },
+          { "name": "CUSTOMER_NAME", "type": "VARCHAR(100)" }
+        ]
+      }
+    ],
+    "solutionQuery": "SELECT CUSTOMERS.CUSTOMER_NAME, ORDERS.ORDER_TOTAL\nFROM ORDERS\nINNER JOIN CUSTOMERS ON ORDERS.CUSTOMER_ID = CUSTOMERS.CUSTOMER_ID;",
+    "validation": {
+      "mode": "requirements",
+      "requirements": [
+        { "type": "select-columns", "columns": ["CUSTOMERS.CUSTOMER_NAME", "ORDERS.ORDER_TOTAL"] },
+        { "type": "table", "value": "ORDERS" },
+        { "type": "join", "joinType": "INNER", "table": "CUSTOMERS", "left": "ORDERS.CUSTOMER_ID", "right": "CUSTOMERS.CUSTOMER_ID" }
+      ]
+    },
+    "explanation": "An INNER JOIN keeps only rows where the CUSTOMER_ID values match in both tables. Qualifying the selected columns with table names makes the source of each value clear.",
+    "commonMistakes": ["Joining without an ON condition, which creates too many row combinations.", "Selecting CUSTOMER_NAME from ORDERS even though it belongs to CUSTOMERS."],
+    "difficulty": "intermediate",
+    "tags": ["inner-join", "join-condition", "select"],
+    "references": [{ "label": "HackerRank SQL (Basic) skills directory", "url": "https://www.hackerrank.com/skills-directory/sql_basic" }],
+    "status": "draft"
+  },
+  {
+    "id": "hackerrank-sql-basic-joins-left-008",
+    "certificationId": "hackerrank-sql-basic",
+    "domainId": "sql-basic-joins",
+    "objectiveIds": ["sql-basic-joins-left", "sql-basic-joins-conditions"],
+    "type": "sql-query",
+    "prompt": "Return every TEAM_NAME and any matching PROJECT_TITLE. Teams without projects must still appear in the result. Match TEAMS to PROJECTS using TEAM_ID.",
+    "dialect": "standard-sql",
+    "schema": [
+      {
+        "name": "TEAMS",
+        "columns": [
+          { "name": "TEAM_ID", "type": "INTEGER" },
+          { "name": "TEAM_NAME", "type": "VARCHAR(80)" }
+        ]
+      },
+      {
+        "name": "PROJECTS",
+        "columns": [
+          { "name": "PROJECT_ID", "type": "INTEGER" },
+          { "name": "TEAM_ID", "type": "INTEGER" },
+          { "name": "PROJECT_TITLE", "type": "VARCHAR(120)" }
+        ]
+      }
+    ],
+    "solutionQuery": "SELECT TEAMS.TEAM_NAME, PROJECTS.PROJECT_TITLE\nFROM TEAMS\nLEFT JOIN PROJECTS ON TEAMS.TEAM_ID = PROJECTS.TEAM_ID;",
+    "validation": {
+      "mode": "requirements",
+      "requirements": [
+        { "type": "select-columns", "columns": ["TEAMS.TEAM_NAME", "PROJECTS.PROJECT_TITLE"] },
+        { "type": "table", "value": "TEAMS" },
+        { "type": "join", "joinType": "LEFT", "table": "PROJECTS", "left": "TEAMS.TEAM_ID", "right": "PROJECTS.TEAM_ID" }
+      ]
+    },
+    "explanation": "A LEFT JOIN preserves every row from TEAMS. If no matching project exists, the PROJECTS columns are returned as NULL while the team still appears.",
+    "commonMistakes": ["Using INNER JOIN, which removes teams with no project.", "Starting FROM PROJECTS, which preserves the wrong side of the relationship."],
+    "difficulty": "intermediate",
+    "tags": ["left-join", "join-condition", "null"],
+    "references": [{ "label": "HackerRank SQL (Basic) skills directory", "url": "https://www.hackerrank.com/skills-directory/sql_basic" }],
+    "status": "draft"
+  },
+  {
+    "id": "hackerrank-sql-basic-queries-like-009",
+    "certificationId": "hackerrank-sql-basic",
+    "domainId": "sql-basic-queries",
+    "objectiveIds": ["sql-basic-queries-select", "sql-basic-queries-where"],
+    "type": "sql-query",
+    "prompt": "Return every column from USERS for accounts whose EMAIL ends with '@example.org'.",
+    "dialect": "standard-sql",
+    "schema": [
+      {
+        "name": "USERS",
+        "columns": [
+          { "name": "USER_ID", "type": "INTEGER" },
+          { "name": "DISPLAY_NAME", "type": "VARCHAR(80)" },
+          { "name": "EMAIL", "type": "VARCHAR(150)" }
+        ]
+      }
+    ],
+    "solutionQuery": "SELECT *\nFROM USERS\nWHERE EMAIL LIKE '%@example.org';",
+    "validation": {
+      "mode": "requirements",
+      "requirements": [
+        { "type": "select-all-columns" },
+        { "type": "table", "value": "USERS" },
+        { "type": "like", "column": "EMAIL", "pattern": "%@example.org" }
+      ]
+    },
+    "explanation": "LIKE performs pattern matching. The percent sign is a wildcard for any number of leading characters, so the pattern matches email values that end with @example.org.",
+    "commonMistakes": ["Using = instead of LIKE, which would look for the literal text % @example.org.", "Putting the percent sign after the domain, which would match values beginning with the domain instead."],
+    "difficulty": "introductory",
+    "tags": ["like", "where", "wildcard", "select"],
+    "references": [{ "label": "HackerRank SQL (Basic) skills directory", "url": "https://www.hackerrank.com/skills-directory/sql_basic" }],
+    "status": "draft"
+  }
+]

@@ -1,0 +1,21 @@
+---
+description: UI, interaction, accessibility, and design-token conventions for the study experience.
+globs: ["src/**/*.js", "src/**/*.jsx", "src/**/*.css", "src/**/*.html", "design/**/*"]
+alwaysApply: false
+---
+
+# UI and accessibility rules
+
+Read `docs/DESIGN-SYSTEM.md` and `design/tokens.json` before introducing visual styles.
+
+- Prefer semantic HTML and native controls before custom widgets.
+- Every interactive control must be usable with keyboard navigation and have a visible focus state.
+- Do not communicate correctness, progress, or status through color alone.
+- Associate labels, instructions, errors, and answer feedback with the relevant control.
+- Preserve the user's selected answer until they submit or intentionally reset the question.
+- Make the question, options, submit action, feedback, and next action visually distinct.
+- Design for narrow screens first, then expand for larger screens.
+- Use readable line lengths, adequate touch targets, and motion that can be reduced or disabled.
+- Use Tailwind utilities backed by the shared theme tokens for colors, spacing, typography, radii, and shadows.
+- Use the five project colors as the product palette: `#FF9F1C`, `#FFBF69`, `#FFFFFF`, `#CBF3F0`, and `#2EC4B6`. Use a dark neutral only when needed for readable text or an accessible outline.
+- Keep certification branding subordinate to the learner's task and avoid implying official affiliation.
